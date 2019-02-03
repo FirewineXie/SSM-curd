@@ -60,7 +60,7 @@ public class Msg {
         this.msg = msg;
     }
 
-    public Msg add(String key, PageInfo value) {
+    public Msg add(String key, Object value) {
 
         this.getExtend().put(key,value);
         return this;
