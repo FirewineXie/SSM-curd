@@ -56,4 +56,46 @@ public class EmployeeService {
 
         return count ==0;
     }
+
+    /**
+     * 根据id查询员工
+     * @return
+     */
+    public Employee getEmp(Integer id) {
+
+        Employee employee = employeeMapper.selectByPrimaryKey(id);
+       return employee;
+    }
+
+    /**
+     * 员工更新
+     * @param employee
+     * @return
+     */
+    public void updateEmp(Employee employee) {
+
+        employeeMapper.updateByPrimaryKeySelective(employee);
+
+    }
+
+    /**
+     * 员工单个删除
+     * @param id
+     */
+    public void deleteEmp(Integer id) {
+        employeeMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 批量删除
+     * @param ids
+     */
+    public void deleteBatch(List<Integer> ids) {
+
+        EmployeeExample employeeExample = new EmployeeExample();
+        EmployeeExample.Criteria criteria = employeeExample.createCriteria();
+        //delete from xxx where emp_id in(1,2,3)
+        criteria.andEmpIdIn(ids);
+        employeeMapper.deleteByExample(employeeExample);
+    }
 }
